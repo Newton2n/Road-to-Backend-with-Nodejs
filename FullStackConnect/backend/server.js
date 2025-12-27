@@ -1,4 +1,6 @@
 import express from "express";
+import * as dotenv from "dotenv";
+dotenv.config(); 
 const app = express();
 app.get("/", (req, res) => {
   res.send("server is ready");
@@ -35,7 +37,8 @@ app.get("/api/jokes", (req, res) => {
 
   res.send(jokes);
 });
-const port = process.env.PORT || 3000;
+const port = process.env.PORT ||3000;
+console.log(process.env.PORT)
 app.listen(port, () => {
   console.log(`port is ready, listening at ${port}`);
 });
