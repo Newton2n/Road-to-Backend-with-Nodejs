@@ -1,5 +1,5 @@
 const http = require("http");
-
+const fs = require("fs")
 const server = http.createServer((req, res) => {
   console.log(req.url, req.headers);
   console.log("Method", req.method);
@@ -21,6 +21,11 @@ const server = http.createServer((req, res) => {
     res.write('<button type="submit">Submit</button>');
     res.write("</form>");
     res.write("</html>");
+    return res.end();
+  } else if (req.url.toLowerCase() === "/submit-result" && req.method === "POST") {
+    res.setHeader("Location", "/");
+    fs.writeFileSync("text.txt","Newton bepari ")
+    res.statusCode = 302; // status 302 for redirect url status code
     return res.end();
   }
   res.setHeader("content-type", "text/html");
